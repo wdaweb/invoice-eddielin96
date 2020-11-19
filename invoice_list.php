@@ -1,9 +1,15 @@
 <?php
 include_once "base.php";
 
-$sql="select * from `invoices` order by date desc";
+$period=ceil(date("m")/2);
+
+$sql="select * from `invoices` where period='$period' order by date desc";
 
 $rows=$pdo->query($sql)->fetchAll();
+
+
+
+
 
 ?>
 
@@ -27,6 +33,9 @@ $rows=$pdo->query($sql)->fetchAll();
             </button>
             <button class="btn btn-sm btn-danger">
             <a class="text-light" href="?do=del_invoice&id=<?=$row['id'];?>">刪除</a>
+            </button>
+            <button class="btn btn-sm btn-success">
+            <a class="text-light" href="?do=award&id=<?=$row['id'];?>">兌獎</a>
             </button>
         </td>
     </tr>
